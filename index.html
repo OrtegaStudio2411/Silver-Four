@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silver Four – La elegancia que te acompaña</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+ 
+  <style>
+    :root {
+      --gold:     #c9a84c;
+      --gold-lt:  #e8c97a;
+      --gold-dk:  #8a6820;
+      --green:    #2c4a2e;
+      --green-lt: #3d6640;
+      --cream:    #f5f0e8;
+      --dark:     #0d1a0e;
+      --marble:   #ede8de;
+      --text:     #1a1a1a;
+    }
+ 
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+    }
+ 
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .4;
+    }
+ 
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 60px;
+      background: rgba(13, 26, 14, .85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,168,76,.18);
+    }
+ 
+    .nav-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: .12em;
+      text-decoration: none;
+    }
+ 
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+ 
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      opacity: .75;
+      transition: opacity .25s, color .25s;
+    }
+ 
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+ 
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(44,74,46,.9) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,168,76,.12) 0%, transparent 60%),
+        var(--dark);
+    }
+ 
+    /* decorative rings */
+    #hero::before, #hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,.12);
+      animation: pulse-ring 6s ease-in-out infinite;
+    }
+    #hero::before { width: 700px; height: 700px; animation-delay: 0s; }
+    #hero::after  { width: 1100px; height: 1100px; animation-delay: 2s; }
+ 
+    @keyframes pulse-ring {
+      0%,100% { transform: scale(1);   opacity: .4; }
+      50%      { transform: scale(1.04); opacity: .15; }
+    }
+ 
+    .hero-logo {
+      width: 200px;
+      max-width: 55vw;
+      border-radius: 50%;
+      margin-bottom: 36px;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(201,168,76,.45));
+      position: relative; z-index: 1;
+    }
+ 
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+ 
+    #hero h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.4rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--gold-lt) 0%, var(--gold) 40%, var(--gold-dk) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+ 
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: rgba(245,240,232,.7);
+      margin-bottom: 10px;
+      letter-spacing: .04em;
+      position: relative; z-index: 1;
+    }
+ 
+    .hero-divider {
+      width: 120px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 22px auto;
+    }
+ 
+    .hero-sub {
+      max-width: 580px;
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(245,240,232,.65);
+      margin-bottom: 40px;
+      position: relative; z-index: 1;
+    }
+ 
+    .btn-primary {
+      display: inline-block;
+      padding: 15px 40px;
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      position: relative; z-index: 1;
+      transition: background .3s, color .3s, box-shadow .3s, transform .2s;
+    }
+ 
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--dark);
+      box-shadow: 0 0 30px rgba(201,168,76,.4);
+      transform: translateY(-2px);
+    }
+ 
+    /* ── SECTION SHELL ── */
+    .section {
+      padding: 110px 24px;
+      max-width: 1240px;
+      margin: auto;
+    }
+ 
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+ 
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      color: var(--cream);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+ 
+    .section-title span {
+      background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+ 
+    .section-desc {
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(245,240,232,.6);
+      max-width: 560px;
+      margin-bottom: 60px;
+    }
+ 
+    /* ── CATALOG SECTIONS ── */
+    .catalog-block {
+      padding: 100px 0;
+      border-bottom: 1px solid rgba(201,168,76,.1);
+    }
+ 
+    .catalog-block:last-of-type { border-bottom: none; }
+ 
+    /* alternating layout */
+    .catalog-inner {
+      max-width: 1240px;
+      margin: auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+ 
+    .catalog-block:nth-child(even) .catalog-inner { direction: rtl; }
+    .catalog-block:nth-child(even) .catalog-inner > * { direction: ltr; }
+ 
+    /* image mosaic */
+    .catalog-images {
+      position: relative;
+      height: 480px;
+    }
+ 
+    .catalog-images img {
+      position: absolute;
+      border-radius: 4px;
+      object-fit: cover;
+      transition: transform .5s ease, box-shadow .5s ease;
+    }
+ 
+    .catalog-images img:hover {
+      transform: scale(1.04) translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.7), 0 0 0 1px rgba(201,168,76,.3);
+      z-index: 10;
+    }
+ 
+    .img-main  { width: 66%; height: 72%; top: 0; left: 0; }
+    .img-sec   { width: 50%; height: 55%; bottom: 0; right: 0; border: 2px solid rgba(201,168,76,.25); }
+    .img-badge {
+      position: absolute; top: 14px; right: 14px;
+      background: var(--gold);
+      color: var(--dark);
+      font-family: 'Montserrat', sans-serif;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+    }
+ 
+    /* product cards */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 36px;
+    }
+ 
+    .product-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(201,168,76,.12);
+      border-radius: 4px;
+      padding: 22px 20px;
+      transition: border-color .3s, transform .3s, background .3s;
+      cursor: pointer;
+    }
+ 
+    .product-card:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,.06);
+      transform: translateY(-5px);
+    }
+ 
+    .product-card .p-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+ 
+    .product-card .p-mat {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .8;
+      margin-bottom: 10px;
+    }
+ 
+    .product-card .p-price {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: var(--gold-lt);
+    }
+ 
+    .btn-outline-sm {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 20px;
+      border: 1px solid rgba(201,168,76,.45);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: .62rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background .25s, color .25s;
+    }
+ 
+    .btn-outline-sm:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+ 
+    /* ── MARQUEE STRIP ── */
+    .marquee-wrap {
+      overflow: hidden;
+      background: var(--green);
+      padding: 16px 0;
+      border-top: 1px solid rgba(201,168,76,.2);
+      border-bottom: 1px solid rgba(201,168,76,.2);
+    }
+ 
+    .marquee-track {
+      display: flex;
+      gap: 60px;
+      white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+ 
+    .marquee-track span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .85;
+    }
+ 
+    .marquee-track .dot {
+      color: var(--gold-dk);
+      opacity: .6;
+    }
+ 
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+ 
+    /* ── WHY US ── */
+    #why {
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 50%, rgba(44,74,46,.25) 0%, transparent 70%),
+        var(--dark);
+    }
+ 
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+      margin-top: 56px;
+    }
+ 
+    .why-card {
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(201,168,76,.1);
+      border-radius: 4px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color .3s, transform .3s;
+    }
+ 
+    .why-card:hover {
+      border-color: rgba(201,168,76,.5);
+      transform: translateY(-6px);
+    }
+ 
+    .why-icon {
+      font-size: 2rem;
+      margin-bottom: 18px;
+      display: block;
+    }
+ 
+    .why-card h3 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: .88rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+      letter-spacing: .05em;
+    }
+ 
+    .why-card p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(245,240,232,.55);
+    }
+ 
+    /* ── CTA BAND ── */
+    #cta {
+      text-align: center;
+      padding: 120px 24px;
+      background:
+        radial-gradient(ellipse 90% 80% at 50% 50%, rgba(44,74,46,.6) 0%, transparent 70%),
+        var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    #cta::before {
+      content: '';
+      position: absolute; inset: 0;
+      border: 1px solid rgba(201,168,76,.08);
+      margin: 40px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+ 
+    #cta .section-title { margin-bottom: 18px; }
+ 
+    #cta p {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: rgba(245,240,232,.6);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+ 
+    /* ── FOOTER ── */
+    footer {
+      background: #060e07;
+      border-top: 1px solid rgba(201,168,76,.12);
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+ 
+    .footer-logo {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: .1em;
+      margin-bottom: 10px;
+    }
+ 
+    .footer-tagline {
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(245,240,232,.4);
+      margin-bottom: 28px;
+    }
+ 
+    .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 28px; }
+ 
+    .footer-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,.5);
+      text-decoration: none;
+      transition: color .25s;
+    }
+ 
+    .footer-links a:hover { color: var(--gold); }
+ 
+    .footer-copy {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .65rem;
+      letter-spacing: .12em;
+      color: rgba(245,240,232,.25);
+    }
+ 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { gap: 20px; }
+ 
+      .catalog-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+ 
+      .catalog-block:nth-child(even) .catalog-inner { direction: ltr; }
+ 
+      .catalog-images { height: 320px; }
+    }
+ 
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .catalog-images { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Silver Four</a>
+    <ul class="nav-links">
+      <li><a href="#cadenas">Cadenas</a></li>
+      <li><a href="#anillos">Anillos</a></li>
+      <li><a href="#pulseras">Pulseras</a></li>
+      <li><a href="#why">Nosotros</a></li>
+      <li><a href="#cta">Comprar</a></li>
+    </ul>
+  </nav>
+ 
+  <!-- HERO -->
+  <section id="hero">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Single_crystal_quartz_oscillator-3.jpg/1px-Single_crystal_quartz_oscillator-3.jpg"
+      class="hero-logo"
+      alt="Silver Four Logo"
+      onerror="this.style.display='none'"
+      id="logo-img"
+    >
+    <!-- We'll inject the uploaded logo via JS below -->
+ 
+    <h1>Silver Four</h1>
+    <p class="hero-tagline">La elegancia que te acompaña.</p>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">
+      Joyería artesanal en plata y oro diseñada para quienes
+      aprecian los detalles. Cada pieza cuenta una historia.
+    </p>
+    <a href="#cadenas" class="btn-primary">Explorar Colección</a>
+  </section>
+ 
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Cadenas</span><span class="dot">✦</span>
+      <span>Anillos</span><span class="dot">✦</span>
+      <span>Pulseras</span><span class="dot">✦</span>
+      <span>Plata 925</span><span class="dot">✦</span>
+      <span>Oro 18K</span><span class="dot">✦</span>
+      <span>Hecho a Mano</span><span class="dot">✦</span>
+      <span>Envío a Todo Ecuador</span><span class="dot">✦</span>
+      <span>Cadenas</span><span class="dot">✦</span>
+      <span>Anillos</span><span class="dot">✦</span>
+      <span>Pulseras</span><span class="dot">✦</span>
+      <span>Plata 925</span><span class="dot">✦</span>
+      <span>Oro 18K</span><span class="dot">✦</span>
+      <span>Hecho a Mano</span><span class="dot">✦</span>
+      <span>Envío a Todo Ecuador</span><span class="dot">✦</span>
+    </div>
+  </div>
+ 
+  <!-- CADENAS -->
+  <div class="catalog-block" id="cadenas">
+    <div class="catalog-inner">
+      <div class="catalog-images">
+        <img class="img-main" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&auto=format&fit=crop" alt="Cadenas de plata">
+        <img class="img-sec"  src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&auto=format&fit=crop" alt="Cadena detalle">
+        <span class="img-badge">Nuevo</span>
+      </div>
+ 
+      <div>
+        <span class="section-label">Colección 01</span>
+        <h2 class="section-title">Cadenas <span>Artesanales</span></h2>
+        <p class="section-desc">
+          Forjadas en plata 925 y oro 18K, nuestras cadenas combinan
+          tradición orfebre con diseño contemporáneo. Desde eslabon
+          fino hasta figaro grueso — hay una para cada estilo.
+        </p>
+ 
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="p-name">Cadena Figaro</div>
+            <div class="p-mat">Plata 925</div>
+            <div class="p-price">$45</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+          <div class="product-card">
+            <div class="p-name">Cadena Box</div>
+            <div class="p-mat">Oro 18K</div>
+            <div class="p-price">$89</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+          <div class="product-card">
+            <div class="p-name">Cadena Rope</div>
+            <div class="p-mat">Plata 925</div>
+            <div class="p-price">$55</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ANILLOS -->
+  <div class="catalog-block" id="anillos">
+    <div class="catalog-inner">
+      <div class="catalog-images">
+        <img class="img-main" src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop" alt="Anillos de plata">
+        <img class="img-sec"  src="https://images.unsplash.com/photo-1607703703520-bb638e84caf2?w=600&auto=format&fit=crop" alt="Anillo detalle">
+        <span class="img-badge">Destacado</span>
+      </div>
+ 
+      <div>
+        <span class="section-label">Colección 02</span>
+        <h2 class="section-title">Anillos <span>Exclusivos</span></h2>
+        <p class="section-desc">
+          Cada anillo es una declaración. Desde bandas minimalistas hasta
+          piezas con piedras semipreciosas, nuestra colección celebra la
+          individualidad con materiales de primera calidad.
+        </p>
+ 
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="p-name">Anillo Banda</div>
+            <div class="p-mat">Plata 925</div>
+            <div class="p-price">$38</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+          <div class="product-card">
+            <div class="p-name">Anillo Sello</div>
+            <div class="p-mat">Oro 18K</div>
+            <div class="p-price">$120</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+          <div class="product-card">
+            <div class="p-name">Anillo Piedra</div>
+            <div class="p-mat">Plata + Onix</div>
+            <div class="p-price">$65</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- PULSERAS -->
+  <div class="catalog-block" id="pulseras">
+    <div class="catalog-inner">
+      <div class="catalog-images">
+        <img class="img-main" src="https://images.unsplash.com/photo-1573408301185-9519f94815d7?w=800&auto=format&fit=crop" alt="Pulseras de plata">
+        <img class="img-sec"  src="https://images.unsplash.com/photo-1619119069152-a2b331eb392a?w=600&auto=format&fit=crop" alt="Pulsera detalle">
+        <span class="img-badge">Más Vendido</span>
+      </div>
+ 
+      <div>
+        <span class="section-label">Colección 03</span>
+        <h2 class="section-title">Pulseras <span>Únicas</span></h2>
+        <p class="section-desc">
+          Del brazalete rígido al charm personalizable — nuestras pulseras
+          se adaptan a tu muñeca y a tu historia. Diseños que van desde
+          lo elegante hasta lo atrevido.
+        </p>
+ 
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="p-name">Pulsera Bangle</div>
+            <div class="p-mat">Plata 925</div>
+            <div class="p-price">$42</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+          <div class="product-card">
+            <div class="p-name">Pulsera Charm</div>
+            <div class="p-mat">Plata + Dije</div>
+            <div class="p-price">$58</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+          <div class="product-card">
+            <div class="p-name">Brazalete Oro</div>
+            <div class="p-mat">Oro 18K</div>
+            <div class="p-price">$110</div>
+            <a href="#cta" class="btn-outline-sm">Ver Más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- MARQUEE 2 -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" style="animation-direction:reverse;">
+      <span>Garantía de Calidad</span><span class="dot">✦</span>
+      <span>Plata 925 Certificada</span><span class="dot">✦</span>
+      <span>Diseño Exclusivo</span><span class="dot">✦</span>
+      <span>Envío Express</span><span class="dot">✦</span>
+      <span>Atención Personalizada</span><span class="dot">✦</span>
+      <span>Garantía de Calidad</span><span class="dot">✦</span>
+      <span>Plata 925 Certificada</span><span class="dot">✦</span>
+      <span>Diseño Exclusivo</span><span class="dot">✦</span>
+      <span>Envío Express</span><span class="dot">✦</span>
+      <span>Atención Personalizada</span><span class="dot">✦</span>
+    </div>
+  </div>
+ 
+  <!-- WHY US -->
+  <section id="why">
+    <div class="section" style="text-align:center; padding-bottom:0;">
+      <span class="section-label">¿Por qué elegirnos?</span>
+      <h2 class="section-title">La <span>diferencia</span> Silver Four</h2>
+    </div>
+    <div class="section" style="padding-top:0;">
+      <div class="why-grid">
+        <div class="why-card">
+          <span class="why-icon">🐍</span>
+          <h3>Identidad Única</h3>
+          <p>Nuestro emblema representa fuerza y elegancia. Cada pieza lleva el espíritu Silver Four.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">⚗️</span>
+          <h3>Materiales Premium</h3>
+          <p>Plata 925 y oro 18K certificados. Sin imitaciones, sin compromisos en calidad.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">✋</span>
+          <h3>Hecho a Mano</h3>
+          <p>Cada pieza es trabajada por artesanos expertos con atención obsesiva al detalle.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">📦</span>
+          <h3>Envío a Ecuador</h3>
+          <p>Entregamos en todo el país con empaque premium y seguimiento en tiempo real.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CTA -->
+  <section id="cta">
+    <span class="section-label">Únete a la familia</span>
+    <h2 class="section-title" style="color:var(--cream)">¿Listo para <span>brillar</span>?</h2>
+    <p>Escríbenos por WhatsApp o Instagram y te asesoramos para encontrar la pieza perfecta para ti.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://wa.me/593000000000" class="btn-primary">WhatsApp</a>
+      <a href="https://instagram.com" class="btn-primary" style="background:rgba(201,168,76,.1);">Instagram</a>
+    </div>
+  </section>
+ 
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Silver Four</div>
+    <div class="footer-tagline">La elegancia que te acompaña.</div>
+    <div class="footer-links">
+      <a href="#cadenas">Cadenas</a>
+      <a href="#anillos">Anillos</a>
+      <a href="#pulseras">Pulseras</a>
+      <a href="#why">Nosotros</a>
+      <a href="#cta">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2026 Silver Four · Todos los derechos reservados</div>
+  </footer>
+ 
+  <script>
+    // Inject uploaded logo
+    const logoEl = document.getElementById('logo-img');
+    // The logo image is from the context — we embed it as the hero image using a known URL trick
+    // Since it's a local upload we'll set a descriptive placeholder styled to match
+    logoEl.src = 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=400&h=400&auto=format&fit=crop&crop=center';
+    logoEl.style.display = 'block';
+    // Note: replace the src above with your actual hosted logo URL
+ 
+    // Smooth reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.12 });
+ 
+    document.querySelectorAll('.catalog-inner, .why-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity .7s ease, transform .7s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
